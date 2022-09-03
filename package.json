@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/graycodesnu/team-profile-generator#readme",
   "dependencies": {
-    "inquirer": "^9.1.0"
+    "inquirer": "^8.2.4"
   },
   "devDependencies": {
     "jest": "^28.1.3"
