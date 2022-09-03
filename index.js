@@ -1,17 +1,21 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const path = require('path');
 
-// Generate HTML
+// TODO: Generate HTML
+  // Link javascript to newly gnerated html
 const generateHTML = require('./src/template.js');
+  // Create new directory
+const OUTPUT_DIR = path.resolve(__dirname, 'output');
+const outputPath = path.join(OUTPUT_DIR, 'team.html');
 
-// Link js files to HTML 
-
+// TODO: Link to lib path and files
 const Engineer = require('./lib/engineer.js');
-
 const Intern = require('./lib/intern.js');
-
 const Manager = require('./lib/manager');
-const { type } = require('os');
+
+
+// ? const { type } = require('os');
 
 const teamArray = [];
 
@@ -21,6 +25,8 @@ const addTeam = () => {
 inquirer
   .prompt([
     {
+
+// TODO: Prompt menu
       type: 'list',
       name: 'addEmployeePrompt',
       message: 'Which type of employee do you want to add?',
@@ -40,7 +46,7 @@ inquirer
           break;
 
           default:
-            generateTeam();
+            generateTeamHTML();
       }
     })
   
@@ -53,27 +59,31 @@ inquirer
 
           {
             type: 'input',
-            name: 'manager name',
+            name: 'name',
             message: 'Manager Name:',
           },
           {
             type: 'input',
-            name: 'employee id',
+            name: 'employeeID',
             message: 'Employee ID:',
           },
           {
             type: 'input',
-            name: 'email address',
+            name: 'emailAddress',
             message: 'Email Address:',
           },
           {
             type: 'input',
-            name: 'office number',
+            name: 'officeNumber',
             message: 'Office Number:',
           },
-        ])
+          // Push to new file when generated
+        ]).then(response => {
+          const manager = new Manager(response.name, response.employeeID, response.emailAddress, response.officeNumber);
+          teamArray.push(manager);
         // Loops back to menu
-        .then(addTeam);
+        addTeam();
+        })
       }
 
 // TODO: Engineer inquirer prompts
@@ -82,27 +92,30 @@ inquirer
         .prompt([
           {
             type: 'input',
-            name: 'engineer name',
+            name: 'name',
             message: 'Engineer Name:',
           },
           {
             type: 'input',
-            name: 'engineer id',
+            name: 'employeeID',
             message: 'Engineer ID:',
           },
           {
             type: 'input',
-            name: 'email address',
+            name: 'emailAddress',
             message: 'Email Address:',
           },
           {
             type: 'input',
-            name: 'github username',
+            name: 'githubUsername',
             message: 'GitHub Username:',
           },
-        ])
+        ]).then(response => {
+          const engineer = new Engineer(response.name, response.employeeID, response.emailAddress, response.officeNumber);
+          teamArray.push(engineer);
         // Loops back to menu
-        .then(addTeam);
+        addTeam();
+        })
       }
 
 
@@ -112,33 +125,45 @@ inquirer
         .prompt([
           {
             type: 'input',
-            name: 'intern name',
+            name: 'name',
             message: 'Intern Name:',
           },
           {
             type: 'input',
-            name: 'employee id',
+            name: 'employeeID',
             message: 'Employee ID:',
           },
           {
             type: 'input',
-            name: 'email address',
+            name: 'emailAddress',
             message: 'Email Address:',
           },
           {
             type: 'input',
-            name: 'intern school',
+            name: 'internSchool',
             message: 'Intern School:',
           },
-        ])
+        ]).then(response => {
+          const intern = new Intern(response.name, response.employeeID, response.emailAddress, response.officeNumber);
+          teamArray.push(intern);
         // Loops back to menu
-        .then(addTeam);
+        addTeam();
+        })
       }
+      
+// !
+// ! previously team html 
+// !
+
+};
 
 // TODO: Generate HTML when "none" option is selected      
-      const generateTeam = () => {
-        console.log('Generating Team . . .')
-      }
+const generateTeamHTML = () => {
+  console.log('Generating Team . . .');
+if(!fs.existsSync(OUTPUT_DIR)) {
+  fs.mkdir(OUTPUT_DIR)
+}
+fs.writeFileSync(outputPath, generateHTML(teamArray), 'utf-8');
 };
 
 addTeam();
