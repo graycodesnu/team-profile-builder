@@ -1,170 +1,160 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // TODO: Generate HTML
-  // Link javascript to newly gnerated html
-const generateHTML = require('./src/template.js');
+  // Link to newly gnerated html
+const generateHTML = require('./src/template');
   // Create new directory
-const OUTPUT_DIR = path.resolve(__dirname, 'output');
-const outputPath = path.join(OUTPUT_DIR, 'team.html');
+const folder_dir = path.resolve("./dist", "output");
+const outputPath = path.join(folder_dir, "team.html");  
 
 // TODO: Link to lib path and files
-const Engineer = require('./lib/engineer.js');
-const Intern = require('./lib/intern.js');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
-
-
-// ? const { type } = require('os');
+// const { type } = require('os');
 
 const teamArray = [];
 
-// TODO: Create inquirer prompts
-const addTeam = () => {
-
-return inquirer.prompt([
-    {
-
-// TODO: Prompt menu
-      type: 'list',
-      name: 'addEmployeePrompt',
-      message: 'Which type of employee do you want to add?',
-      choices: ['Manager', 'Engineer', 'Intern', 'None - I am done adding team members.'],
-
-      // Switch case for prompts based on user input 
-    }]).then(function (userInput) {
-      switch(userInput.addEmployeePrompt) {
-        case 'Manager':
-          addManager();
-          break;
-        case 'Engineer':
-          addEngineer();
-          break;
-        case 'Intern':
-          addIntern();
-          break;
-
-          default:
-            generateTeamHTML();
-      }
-    })
-  
-
 // TODO: Manager inquirer prompts
 
-    function addManager() {
-      inquirer
-        .prompt([
+const addManager = () => {
+  return inquirer.prompt([
 
-          {
-            type: 'input',
-            name: 'name',
-            message: 'Manager Name:',
-          },
-          {
-            type: 'input',
-            name: 'employeeID',
-            message: 'Employee ID:',
-          },
-          {
-            type: 'input',
-            name: 'emailAddress',
-            message: 'Email Address:',
-          },
-          {
-            type: 'input',
-            name: 'officeNumber',
-            message: 'Office Number:',
-          },
-          // Push to new file when generated
-        ]).then(response => {
-          const manager = new Manager(response.name, response.employeeID, response.emailAddress, response.officeNumber);
-          teamArray.push(manager);
-        // Loops back to menu
-        addTeam();
-        })
-      }
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Manager Name:',
+    },
+    {
+      type: 'input',
+      name: 'employeeId',
+      message: 'Employee ID:',
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Email Address:',
+    },
+    {
+      type: 'input',
+      name: 'officeNumber',
+      message: 'Office Number:',
+    },
+    // Push to new file when generated
+  ]).then(response => {
+    console.log(response);
+    const manager = new Manager(response.name, response.employeeId, response.email, response.officeNumber);
+    teamArray.push(manager);
+  // Loops to menu
+  addTeamPrompt();
+  })
+};
 
+
+
+
+
+// TODO: Create prompt menu
+const addTeamPrompt = () => {
+return inquirer.prompt([
+  {
+  type: 'list',
+  name: 'addEmployeePrompt',
+  message: 'Which type of employee do you want to add?',
+  choices: ['Manager', 'Engineer', 'Intern', 'None - I am done adding team members.'],
+
+  // Switch case for prompts based on user input 
+  }]).then(function (userChoice) {
+  switch(userChoice.addEmployeePrompt) {
+    case 'Manager':
+      addManager();
+      break;
+    case 'Engineer':
+      addEngineer();
+      break;
+    case 'Intern':
+      addIntern();
+      break;
+
+      default:
+        createTeam();
+    }
+  });
+};
+  
 // TODO: Engineer inquirer prompts
-      function addEngineer() {
-        inquirer
-        .prompt([
-          {
-            type: 'input',
-            name: 'name',
-            message: 'Engineer Name:',
-          },
-          {
-            type: 'input',
-            name: 'employeeID',
-            message: 'Engineer ID:',
-          },
-          {
-            type: 'input',
-            name: 'emailAddress',
-            message: 'Email Address:',
-          },
-          {
-            type: 'input',
-            name: 'githubUsername',
-            message: 'GitHub Username:',
-          },
-        ]).then(response => {
-          const engineer = new Engineer(response.name, response.employeeID, response.emailAddress, response.officeNumber);
-          teamArray.push(engineer);
-        // Loops back to menu
-        addTeam();
-        })
-      }
-
+const addEngineer = () => {
+  console.log('Add a new engineer!');
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Engineer Name:',
+    },
+    {
+      type: 'input',
+      name: 'employeeId',
+      message: 'Engineer ID:',
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Email Address:',
+    },
+    {
+      type: 'input',
+      name: 'githubUsername',
+      message: 'GitHub Username:',
+    },
+  ]).then(response => {
+    const engineer = new Engineer(response.name, response.employeeId, response.email, response.officeNumber);
+    teamArray.push(engineer);
+  // Loops back to menu
+  addTeamPrompt();
+  });
+};
 
 // TODO: Intern inquirer prompts 
-      function addIntern() {
-        inquirer
-        .prompt([
-          {
-            type: 'input',
-            name: 'name',
-            message: 'Intern Name:',
-          },
-          {
-            type: 'input',
-            name: 'employeeID',
-            message: 'Employee ID:',
-          },
-          {
-            type: 'input',
-            name: 'emailAddress',
-            message: 'Email Address:',
-          },
-          {
-            type: 'input',
-            name: 'internSchool',
-            message: 'Intern School:',
-          },
-        ]).then(response => {
-          const intern = new Intern(response.name, response.employeeID, response.emailAddress, response.officeNumber);
-          teamArray.push(intern);
-        // Loops back to menu
-        addTeam();
-        })
-      }
-
-// !
-// ! previously team html 
-// !
-
+const addIntern = () => {
+return inquirer.prompt([
+  {
+    type: 'input',
+    name: 'name',
+    message: 'Intern Name:',
+  },
+  {
+    type: 'input',
+    name: 'employeeId',
+    message: 'Employee ID:',
+  },
+  {
+    type: 'input',
+    name: 'emailAddress',
+    message: 'Email Address:',
+  },
+  {
+    type: 'input',
+    name: 'school',
+    message: 'Intern School:',
+  },
+  ]).then(response => {
+    const intern = new Intern(response.name, response.employeeId, response.email, response.school);
+    teamArray.push(intern);
+// Loops back to menu
+  addTeamPrompt();
+  })
 };
 
 // TODO: Generate HTML when "none" option is selected      
-const generateTeamHTML = () => {
+const createTeam = () => {
   console.log('Generating Team . . .');
 
-
-if(!fs.existsSync(OUTPUT_DIR)) {
-  fs.mkdir(OUTPUT_DIR)
+  if (!fs.existsSync(folder_dir)) {
+    fs.mkdirSync(folder_dir)
 }
-fs.writeFileSync(outputPath, generateHTML(teamArray), 'utf-8');
-};
+fs.writeFileSync(outputPath, generateHTML(teamArray), "utf-8");
+}
 
-addTeam();
+addManager();

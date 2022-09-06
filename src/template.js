@@ -11,7 +11,7 @@ const htmlTeamArray = [];
 // TODO: Create functions for each employees position to append data to HTML
 const newManager = manager => {
   console.log(manager);
-  let managerHTML = `
+  let newManager = `
   <div class="card" style="width: 18rem;">
     <div> class="card-header">
     ${manager.name} 
@@ -30,12 +30,12 @@ const newManager = manager => {
       </ul>
     </div>
   `;
-  htmlTeamArray.push(managerHTML);
+  htmlTeamArray.push(newManager);
 }
 
 const newEngineer = engineer => {
   console.log(engineer);
-  let engineerHTML = `
+  let newEngineer = `
   <div class="card" style="width: 18rem;">
     <div> class="card-header">
     ${engineer.name} 
@@ -55,14 +55,14 @@ const newEngineer = engineer => {
       </ul>
     </div>
   `;
-  htmlTeamArray.push(engineerHTML);
+  htmlTeamArray.push(newEngineer);
 
 
 }
 
 const newIntern = intern => {
   console.log(intern);
-  let internHTML = ` 
+  let newIntern = ` 
   <div class="card" style="width: 18rem;">
       <div class="card-header">
      ${intern.name} <br/>
@@ -77,19 +77,19 @@ const newIntern = intern => {
       </ul>
   </div>
   `;
-  htmlTeamArray.push(internHTML);
+  htmlTeamArray.push(newIntern);
 }
 
 // TODO: For loop for all positions
- for (let i = 0; i < team.length; i++) {
+for (let i = 0; i < team.length; i++) {
   if (team[i].getEmployee() === "Manager") {
-    newManager(team[i]);
+      newManager(team[i]);
   }
   if (team[i].getEmployee() === "Engineer") {
-    newEngineer(team[i]);
+      newEngineer(team[i]);
   }
   if (team[i].getEmployee() === "Intern") {
-    newIntern(team[i]);
+      newIntern(team[i]);
   }
  }
 
@@ -119,7 +119,9 @@ module.exports = team => {
     <h1> My Team </h1>
     </header>
 
-    <main> ${newlyGeneratedTeam(team)} </main>
+    <main> 
+    <div class="d-flex justify-content-around card-space"> ${newlyGeneratedTeam(team)} </div>
+    </main>
      
 </body>
 </html>
