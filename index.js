@@ -22,8 +22,7 @@ const teamArray = [];
 // TODO: Create inquirer prompts
 const addTeam = () => {
 
-inquirer
-  .prompt([
+return inquirer.prompt([
     {
 
 // TODO: Prompt menu
@@ -150,7 +149,7 @@ inquirer
         addTeam();
         })
       }
-      
+
 // !
 // ! previously team html 
 // !
@@ -160,6 +159,8 @@ inquirer
 // TODO: Generate HTML when "none" option is selected      
 const generateTeamHTML = () => {
   console.log('Generating Team . . .');
+
+
 if(!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdir(OUTPUT_DIR)
 }
