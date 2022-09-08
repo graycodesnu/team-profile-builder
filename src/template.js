@@ -9,7 +9,7 @@ const newManager = manager => {
   console.log(manager);
   let newManager = `
   <div class="card" style="width: 18rem;">
-    <div> class="card-header">
+    <div class="card-header">
     ${manager.name} 
     <br/>
     <i class="fas fa-mug-hot"></i>
@@ -22,7 +22,7 @@ const newManager = manager => {
         <a href="mailto:${manager.email}"> ${manager.email}</a>
       </span>
       </li>
-      <lis class="list-group-item">Office Number: ${manager.officeNumber}</li>
+      <li class="list-group-item">Office Number: ${manager.officeNumber}</li>
       </ul>
     </div>
   `;
@@ -33,20 +33,20 @@ const newEngineer = engineer => {
   console.log(engineer);
   let newEngineer = `
   <div class="card" style="width: 18rem;">
-    <div> class="card-header">
+    <div class="card-header">
     ${engineer.name} 
     <br/>
-    <i class="fas fa-mug-hot"></i>
-    Manager
+    <i class="fas fa-glasses"></i>
+    Engineer
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">ID: ${engineer.id}</li>
+      <li class="list-group-item">ID: ${engineer.id} </li>
       <li class="list-group-item">Email: 
       <span id="email">
-        <a href="mailto:${engineer.email}"> ${engineer.email}</a>
+        <a href="mailto:${engineer.email}"> ${engineer.email} </a>
       </span>
       </li>
-      <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.githubUsername}">${engineer.githubUsername}</a>
+      <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.github}"> ${engineer.github} </a>
       </li>
       </ul>
     </div>
@@ -67,7 +67,7 @@ const newIntern = intern => {
       <li class="list-group-item">ID: ${intern.id}</li>
       <li class="list-group-item">Email: 
       <span id="email">
-      <a href="mailto:${intern.email}">${intern.email}</a>
+      <a href="mailto:${intern.email}"> ${intern.email}</a>
       </span></li>
       <li class="list-group-item">School: ${intern.school}</li>
       </ul>
@@ -96,8 +96,8 @@ for (let i = 0; i < team.length; i++) {
 
 // TODO: Export 
 module.exports = team => {
+  // TODO: Scaffolding for team data
   return `
-// TODO: Scaffolding for team data
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,7 +107,7 @@ module.exports = team => {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/1e0a13a89f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../dist/style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Team Profile Generator</title>
 </head>
 <body>

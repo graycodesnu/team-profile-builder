@@ -6,14 +6,13 @@ const path = require("path");
   // Link to newly gnerated html
 const generateHTML = require('./src/template');
   // Create new directory
-const output_dir = path.resolve("./teamResults", "newTeam");
+const output_dir = path.resolve("./dist");
 const outputPath = path.join(output_dir, "team.html");  
 
 // TODO: Link to lib path and files
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
-// const { type } = require('os');
 
 const teamArray = [];
 
@@ -105,11 +104,11 @@ const addEngineer = () => {
     },
     {
       type: 'input',
-      name: 'githubUsername',
+      name: 'github',
       message: 'GitHub Username:',
     },
   ]).then(response => {
-    const engineer = new Engineer(response.name, response.employeeId, response.email, response.officeNumber);
+    const engineer = new Engineer(response.name, response.employeeId, response.email, response.github);
     teamArray.push(engineer);
   // Loops back to menu
   addTeamPrompt();
@@ -131,7 +130,7 @@ return inquirer.prompt([
   },
   {
     type: 'input',
-    name: 'emailAddress',
+    name: 'email',
     message: 'Email Address:',
   },
   {
@@ -154,7 +153,7 @@ const createTeam = () => {
   if (!fs.existsSync(output_dir)) {
     fs.mkdirSync(output_dir)
 }
-fs.writeFile(outputPath, generateHTML(teamArray), "utf-8");
+fs.writeFile(outputPath, generateHTML(teamArray), () => {});
 }
 
 addManager();

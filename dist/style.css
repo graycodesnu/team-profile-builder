@@ -1,4 +1,4 @@
-.header {
+header {
   color: white;
   background-color: #ea3546;
   padding: 10px;
@@ -9,7 +9,7 @@
   padding: 10px;
 }
 
-.main{
+main{
   display: flex;
   flex-wrap: wrap;
   margin: 15px;
