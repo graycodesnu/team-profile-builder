@@ -1,9 +1,9 @@
 # Team Profile Generator
 
 ## Introduction
-This project is a result of our bootcamp's week 9 homework assignment. Students were expected to create a README.md file generator using Node.js The project repository can be found [here](https://github.com/graycodesnu/team-profile-generator) and the demo video can be found [here](**).
+This project is a result of our bootcamp's week 9 homework assignment. Students were expected to create a README.md file generator using Node.js The project repository can be found [here](https://github.com/graycodesnu/team-profile-generator) and the demo video can be found [here](https://drive.google.com/file/d/1or3sE9IyC_S9jQ-RAelVDyjCGE4dxlR0/view).
 
-![](assets/Screen%20Shot%202022-08-10%20at%208.53.32%20PM.png)
+![](assets/Screen%20Shot%202022-09-07%20at%2010.43.45%20PM.png)
 
 ## Goals 
 The goal of this assignment was to create a team profile generator that would meet the below criteria:
