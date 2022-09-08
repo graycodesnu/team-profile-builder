@@ -6,8 +6,8 @@ const path = require("path");
   // Link to newly gnerated html
 const generateHTML = require('./src/template');
   // Create new directory
-const folder_dir = path.resolve("./dist", "output");
-const outputPath = path.join(folder_dir, "team.html");  
+const output_dir = path.resolve("./teamResults", "newTeam");
+const outputPath = path.join(output_dir, "team.html");  
 
 // TODO: Link to lib path and files
 const Engineer = require('./lib/engineer');
@@ -151,10 +151,10 @@ return inquirer.prompt([
 const createTeam = () => {
   console.log('Generating Team . . .');
 
-  if (!fs.existsSync(folder_dir)) {
-    fs.mkdirSync(folder_dir)
+  if (!fs.existsSync(output_dir)) {
+    fs.mkdirSync(output_dir)
 }
-fs.writeFileSync(outputPath, generateHTML(teamArray), "utf-8");
+fs.writeFile(outputPath, generateHTML(teamArray), "utf-8");
 }
 
 addManager();

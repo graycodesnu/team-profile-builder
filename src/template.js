@@ -1,7 +1,3 @@
-// template string literal that will build the new html file linked to index.js
-
-// const Manager = require("../lib/manager");
-
 const newlyGeneratedTeam = (team) => {
   console.log(team);
 
@@ -82,13 +78,13 @@ const newIntern = intern => {
 
 // TODO: For loop for all positions
 for (let i = 0; i < team.length; i++) {
-  if (team[i].getEmployee() === "Manager") {
+  if (team[i].getRole() === "Manager") {
       newManager(team[i]);
   }
-  if (team[i].getEmployee() === "Engineer") {
+  if (team[i].getRole() === "Engineer") {
       newEngineer(team[i]);
   }
-  if (team[i].getEmployee() === "Intern") {
+  if (team[i].getRole() === "Intern") {
       newIntern(team[i]);
   }
  }
